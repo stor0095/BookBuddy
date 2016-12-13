@@ -1,0 +1,26 @@
+<ion-view view-title="Events in Canada" ng-init="init()">
+    <ion-content style="background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(229,229,229,1) 100%);">
+        <label class="item item-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input id="inputSearch" type="text" placeholder="Search Events by Name or City" ng-model="searchEvents"/>
+			</label>
+        <label class="item item-input">
+    <h4>Filter </h4> 
+ <select ng-model="orderProp" ng-options="opt as opt.label for opt in options"></select>
+</label>
+        <div class="list card" ng-repeat="event in events | orderBy:orderProp.value | filter : searchEvents">
+            <div class="item item-avatar">
+                <img ng-src="{{event.image_url}}">
+                <h2>{{event.title}}</h2>
+                <p>{{event.city}}</p>
+            </div>
+            <div class="item item-body">
+                <p ng-bind-html="event.description.__cdata">{{event.description.__cdata}}</p>
+            </div>
+            <p class="item item-icon dark">
+                Date: {{event.start_at.__text | date}}</br>
+                Where: {{event.venue}}
+            </p>
+        </div>
+    </ion-content>
+</ion-view>
